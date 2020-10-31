@@ -1,40 +1,43 @@
-[hashicorp](#hashicorp)
-=========
+# [hashicorp](#hashicorp)
 
-<img src="https://docs.ansible.com/ansible-tower/3.2.4/html_ja/installandreference/_static/images/logo_invert.png" width="10%" height="10%" alt="Ansible logo" align="right"/>
-<a href="https://travis-ci.org/robertdebock/ansible-role-hashicorp"> <img src="https://travis-ci.org/robertdebock/ansible-role-hashicorp.svg?branch=master" alt="Build status"/></a> <img src="https://img.shields.io/ansible/role/d/"/> <img src="https://img.shields.io/ansible/quality/"/>
+Install HashiCorp products using packages.
 
-<a href="https://github.com/robertdebock/ansible-role-hashicorp/actions"><img src="https://github.com/robertdebock/ansible-role-hashicorp/workflows/GitHub%20Action/badge.svg"/></a>
+|Travis|GitHub|Quality|Downloads|Version|
+|------|------|-------|---------|-------|
+|[![travis](https://travis-ci.com/robertdebock/ansible-role-hashicorp.svg?branch=master)](https://travis-ci.com/robertdebock/ansible-role-hashicorp)|[![github](https://github.com/robertdebock/ansible-role-hashicorp/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-hashicorp/actions)|[![quality](https://img.shields.io/ansible/quality/)](https://galaxy.ansible.com/robertdebock/hashicorp)|[![downloads](https://img.shields.io/ansible/role/d/)](https://galaxy.ansible.com/robertdebock/hashicorp)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-hashicorp.svg)](https://github.com/robertdebock/ansible-role-hashicorp/releases/)|
 
-Install and configure hashicorp on your system.
+## [Example Playbook](#example-playbook)
 
-Example Playbook
-----------------
-
-This example is taken from `molecule/resources/playbook.yml` and is tested on each push, pull request and release.
+This example is taken from `molecule/resources/converge.yml` and is tested on each push, pull request and release.
 ```yaml
 ---
-- name: Converge
+- name: converge
   hosts: all
   become: yes
   gather_facts: yes
 
   roles:
-    - role: robertdebock.hashicorp```
+    - role: robertdebock.hashicorp
+      hashicorp_products:
+        - consul
+        - nomad
+        - vault
+```
 
-The machine you are running this on, may need to be prepared, I use this playbook to ensure everything is in place to let the role work.
+The machine may need to be prepared using `molecule/resources/prepare.yml`:
 ```yaml
 ---
-- name: Converge
+- name: prepare
   hosts: all
   become: yes
   gather_facts: no
 
   roles:
     - role: robertdebock.bootstrap
+    - role: robertdebock.core_dependencies
 ```
 
-After running this role, this playbook runs to verify that everything works, this may be a good example how you can use this role.
+For verification `molecule/resources/verify.yml` runs after the role has been applied.
 ```yaml
 ---
 - name: Verify
@@ -43,22 +46,33 @@ After running this role, this playbook runs to verify that everything works, thi
   gather_facts: yes
 
   tasks:
-    - name: check if connection still works
-      ping:
+    - name: check if product is installed
+      command: "{{ item }} --version"
+      args:
+        creates: nothing
+      loop:
+        - nomad
+        - vault
+        - consul
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
 
-Role Variables
---------------
+## [Role Variables](#role-variables)
 
 These variables are set in `defaults/main.yml`:
 ```yaml
 ---
-# defaults file for hashicorp```
+# defaults file for hashicorp
 
-Requirements
-------------
+# You can install hashicorp products using this list.
+# hashicorp_products:
+#   - nomad
+#   - vault
+#   - consul
+```
+
+## [Requirements](#requirements)
 
 - Access to a repository containing packages, likely on the internet.
 - A recent version of Ansible. (Tests run on the current, previous and next release of Ansible.)
@@ -68,44 +82,40 @@ The following roles can be installed to ensure all requirements are met, using `
 ```yaml
 ---
 - robertdebock.bootstrap
+- robertdebock.core_dependencies
 
 ```
 
-Context
--------
+## [Context](#context)
 
 This role is a part of many compatible roles. Have a look at [the documentation of these roles](https://robertdebock.nl/) for further information.
 
 Here is an overview of related roles:
 ![dependencies](https://raw.githubusercontent.com/robertdebock/drawings/artifacts/hashicorp.png "Dependency")
 
+## [Compatibility](#compatibility)
 
-Compatibility
--------------
-
-This role has been tested on these [container images](https://hub.docker.com/):
+This role has been tested on these [container images](https://hub.docker.com/u/robertdebock):
 
 |container|tags|
 |---------|----|
-|alpine|all|
-|debian|all|
+|amazon|all|
 |el|7, 8|
+|debian|all|
 |fedora|all|
-|opensuse|all|
-|ubuntu|bionic|
+|ubuntu|all|
 
-The minimum version of Ansible required is 2.7 but tests have been done to:
+The minimum version of Ansible required is 2.9, tests have been done to:
 
-- The previous version, on version lower.
+- The previous version.
 - The current version.
 - The development version.
 
 
 
-Testing
--------
+## [Testing](#testing)
 
-[Unit tests](https://travis-ci.org/robertdebock/ansible-role-hashicorp) are done on every commit, pull request, release and periodically.
+[Unit tests](https://travis-ci.com/robertdebock/ansible-role-hashicorp) are done on every commit, pull request, release and periodically.
 
 If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-hashicorp/issues)
 
@@ -137,13 +147,13 @@ image="centos" tox
 image="debian" tag="stable" tox
 ```
 
-License
--------
+## [License](#license)
 
 Apache-2.0
 
 
-Author Information
-------------------
+## [Author Information](#author-information)
 
 [Robert de Bock](https://robertdebock.nl/)
+
+Please consider [sponsoring me](https://github.com/sponsors/robertdebock).
