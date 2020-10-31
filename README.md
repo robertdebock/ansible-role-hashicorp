@@ -21,6 +21,9 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
       hashicorp_products:
         - consul
         - nomad
+        - packer
+        - terraform
+        - vagrant
         - vault
 ```
 
@@ -51,9 +54,12 @@ For verification `molecule/resources/verify.yml` runs after the role has been ap
       args:
         creates: nothing
       loop:
-        - nomad
-        - vault
         - consul
+        - nomad
+        - packer
+        - terraform
+        - vagrant
+        - vault
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
@@ -67,9 +73,12 @@ These variables are set in `defaults/main.yml`:
 
 # You can install hashicorp products using this list.
 # hashicorp_products:
-#   - nomad
-#   - vault
 #   - consul
+#   - nomad
+#   - packer
+#   - terraform
+#   - vagrant
+#   - vault
 ```
 
 ## [Requirements](#requirements)

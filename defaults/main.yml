@@ -3,6 +3,9 @@
 
 # You can install hashicorp products using this list.
 # hashicorp_products:
-#   - nomad
-#   - vault
 #   - consul
+#   - nomad
+#   - packer
+#   - terraform
+#   - vagrant
+#   - vault
