@@ -1,0 +1,6 @@
+#
+# Ansible managed
+#
+exclude_paths:
+  - ./molecule/default/verify.yml
+  - ./.tox

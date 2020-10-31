@@ -1,0 +1,15 @@
+---
+- name: Verify
+  hosts: all
+  become: yes
+  gather_facts: yes
+
+  tasks:
+    - name: check if product is installed
+      command: "{{ item }} --version"
+      args:
+        creates: nothing
+      loop:
+        - nomad
+        - vault
+        - consul

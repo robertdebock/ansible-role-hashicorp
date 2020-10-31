@@ -1,0 +1,18 @@
+---
+- name: test if hashicorp_products is set correctly
+  assert:
+    that:
+      - hashicorp_products is iterable
+    quiet: yes
+  when:
+    - hashicorp_products is defined
+
+- name: test if item in hashicorp_products is set correctly
+  assert:
+    that:
+      - item | length > 0
+      - item in ["consul", "nomad", "vault"]
+    quiet: yes
+  loop: "{{ hashicorp_products }}"
+  when:
+    - hashicorp_products is defined

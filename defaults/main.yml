@@ -1,0 +1,8 @@
+---
+# defaults file for hashicorp
+
+# You can install hashicorp products using this list.
+# hashicorp_products:
+#   - nomad
+#   - vault
+#   - consul

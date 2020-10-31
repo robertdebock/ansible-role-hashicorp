@@ -1,0 +1,36 @@
+---
+# tasks file for hashicorp
+
+- name: include assert.yml
+  include_tasks: assert.yml
+  run_once: yes
+
+- name: install repository for RedHat
+  get_url:
+    url: "{{ hashicorp_repository_url }}"
+    dest: /etc/yum.repos.d/hashicorp.repo
+  when:
+    - ansible_os_family == "RedHat"
+
+- name: install apt key for Debian
+  apt_key:
+    url: "https://apt.releases.hashicorp.com/gpg"
+    state: present
+    validate_certs: no
+  when:
+    - ansible_os_family == "Debian"
+
+- name: install repository for Debian
+  apt_repository:
+    repo: deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main
+    state: present
+  when:
+    - ansible_os_family == "Debian"
+
+- name: install hashicorp product
+  package:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ hashicorp_products }}"
+  when:
+    - hashicorp_products is defined
