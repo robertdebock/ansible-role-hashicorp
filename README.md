@@ -101,8 +101,8 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 |---------|----|
 |amazon|all|
 |el|7, 8|
-|debian|all|
-|fedora|all|
+|debian|buster|
+|fedora|32, 33|
 |ubuntu|all|
 
 The minimum version of Ansible required is 2.9, tests have been done to:

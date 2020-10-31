@@ -17,10 +17,11 @@ galaxy_info:
         - 8
     - name: Debian
       versions:
-        - all
+        - buster
     - name: Fedora
       versions:
-        - all
+        - 32
+        - 33
     - name: Ubuntu
       versions:
         - all
