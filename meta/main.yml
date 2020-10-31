@@ -24,7 +24,8 @@ galaxy_info:
         - 33
     - name: Ubuntu
       versions:
-        - all
+        - bionic
+        - focal
 
   galaxy_tags:
     - hashicorp

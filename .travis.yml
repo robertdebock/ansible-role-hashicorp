@@ -24,9 +24,8 @@ env:
     - image="debian" tag="latest"
     - image="fedora" tag="32"
     - image="fedora" tag="latest"
-    - image="ubuntu" tag="latest"
     - image="ubuntu" tag="bionic"
-    - image="ubuntu" tag="xenial"
+    - image="ubuntu" tag="latest"
 
 cache:
   - pip
