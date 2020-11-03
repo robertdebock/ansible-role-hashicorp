@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Robert de Bock
-  role_name: ad_auth
+  role_name: hashicorp
   description: Install HashiCorp products using packages.
   license: Apache-2.0
   company: none
