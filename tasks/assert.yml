@@ -11,7 +11,7 @@
   assert:
     that:
       - item | length > 0
-      - item in ["consul", "nomad", "packer", "terraform", "vagrant", "vault"]
+      - item in [ "consul", "nomad", "packer", "terraform", "vagrant", "vault" ]
     quiet: yes
   loop: "{{ hashicorp_products }}"
   when:
