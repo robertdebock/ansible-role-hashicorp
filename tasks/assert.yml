@@ -1,4 +1,5 @@
 ---
+
 - name: test if hashicorp_products is set correctly
   assert:
     that:
