@@ -12,18 +12,18 @@
   when:
     - ansible_os_family == "RedHat"
 
-- name: install apt key for Debian
-  apt_key:
-    url: "https://apt.releases.hashicorp.com/gpg"
-    state: present
-    validate_certs: no
-  when:
-    - ansible_os_family == "Debian"
+- name: configure debian
+  block:
+    - name: install apt key for Debian
+      apt_key:
+        url: "https://apt.releases.hashicorp.com/gpg"
+        state: present
+        validate_certs: no
 
-- name: install repository for Debian
-  apt_repository:
-    repo: deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main
-    state: present
+    - name: install repository for Debian
+      apt_repository:
+        repo: deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main
+        state: present
   when:
     - ansible_os_family == "Debian"
 
