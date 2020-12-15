@@ -6,13 +6,9 @@
 
   tasks:
     - name: check if product is installed
-      command: "{{ item }} --version"
+      command: "{{ item.name }} --version"
       args:
         creates: nothing
       loop:
-        - consul
-        - nomad
-        - packer
-        - terraform
-        - vagrant
-        - vault
+        - name: consul
+        - name: vault

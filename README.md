@@ -19,12 +19,13 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
   roles:
     - role: robertdebock.hashicorp
       hashicorp_products:
-        - consul
-        - nomad
-        - packer
-        - terraform
-        - vagrant
-        - vault
+        - name: consul
+
+    - role: robertdebock.hashicorp
+      hashicorp_installation_method: manual
+      hashicorp_products:
+        - name: vault
+          version: 1.4.2
 ```
 
 The machine needs to be prepared in CI this is done using `molecule/resources/prepare.yml`:
@@ -49,14 +50,25 @@ These variables are set in `defaults/main.yml`:
 ---
 # defaults file for hashicorp
 
+# You can select how to intall hashicorp products. Choose from `package` or
+# `manual`. `manual` means this role wil download from
+# "https://releases.hashicorp.com/vault/".
+hashicorp_installation_method: package
+
 # You can install hashicorp products using this list.
 # hashicorp_products:
-#   - consul
-#   - nomad
-#   - packer
-#   - terraform
-#   - vagrant
-#   - vault
+#   - name: consul
+#   - name: nomad
+#   - name: packer
+#   - name: terraform
+#   - name: vagrant
+#   - name: vault
+
+# If you are using `manual` as the `hashicorp_installation_method`, you must
+# specify the version to install.
+# hashicorp_products:
+#   - name: vault
+#     version: 1.6.0
 ```
 
 ## [Requirements](#requirements)

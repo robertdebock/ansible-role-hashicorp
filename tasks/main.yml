@@ -5,32 +5,51 @@
   include_tasks: assert.yml
   run_once: yes
 
-- name: install repository for RedHat
-  get_url:
-    url: "{{ hashicorp_repository_url }}"
-    dest: /etc/yum.repos.d/hashicorp.repo
-  when:
-    - ansible_os_family == "RedHat"
-
-- name: configure debian
+- name: install using package
   block:
-    - name: install apt key for Debian
-      apt_key:
-        url: "https://apt.releases.hashicorp.com/gpg"
-        state: present
-        validate_certs: no
+    - name: install repository for RedHat
+      get_url:
+        url: "{{ hashicorp_repository_url }}"
+        dest: /etc/yum.repos.d/hashicorp.repo
+      when:
+        - ansible_os_family == "RedHat"
 
-    - name: install repository for Debian
-      apt_repository:
-        repo: deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main
-        state: present
-  when:
-    - ansible_os_family == "Debian"
+    - name: configure debian
+      block:
+        - name: install apt key for Debian
+          apt_key:
+            url: "https://apt.releases.hashicorp.com/gpg"
+            state: present
+            validate_certs: no
 
-- name: install hashicorp product
-  package:
-    name: "{{ item }}"
-    state: present
-  loop: "{{ hashicorp_products }}"
+        - name: install repository for Debian
+          apt_repository:
+            repo: deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main
+            state: present
+      when:
+        - ansible_os_family == "Debian"
+
+    - name: install hashicorp product using package
+      package:
+        name: "{{ item.name }}"
+        state: present
+      loop: "{{ hashicorp_products }}"
+      loop_control:
+        label: "{{ item.name }}"
+      when:
+        - hashicorp_products is defined
   when:
-    - hashicorp_products is defined
+    - hashicorp_installation_method == "package"
+
+- name: install manually
+  block:
+    - name: install hashicorp product manually
+      unarchive:
+        src: https://releases.hashicorp.com/{{ item.name }}/{{ item.version }}/{{ item.name }}_{{ item.version }}_linux_amd64.zip
+        dest: /usr/local/bin
+        remote_src: yes
+      loop: "{{ hashicorp_products }}"
+      loop_control:
+        label: "{{ item.name }}"
+  when:
+    - hashicorp_installation_method == "manual"

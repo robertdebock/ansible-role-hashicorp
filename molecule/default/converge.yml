@@ -7,9 +7,10 @@
   roles:
     - role: ansible-role-hashicorp
       hashicorp_products:
-        - consul
-        - nomad
-        - packer
-        - terraform
-        - vagrant
-        - vault
+        - name: consul
+
+    - role: ansible-role-hashicorp
+      hashicorp_installation_method: manual
+      hashicorp_products:
+        - name: vault
+          version: 1.4.2
