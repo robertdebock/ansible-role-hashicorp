@@ -12,3 +12,5 @@
       loop:
         - name: consul
         - name: vault
+      environment:
+        PATH: "/bin:/usr/bin:/usr/local/bin"
