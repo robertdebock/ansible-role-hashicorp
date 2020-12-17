@@ -45,7 +45,7 @@
   block:
     - name: install hashicorp product manually
       unarchive:
-        src: https://releases.hashicorp.com/{{ item.name }}/{{ item.version }}/{{ item.name }}_{{ item.version }}_linux_amd64.zip
+        src: "{{ hashicorp_src }}"
         dest: /usr/bin
         mode: "0755"
         remote_src: yes

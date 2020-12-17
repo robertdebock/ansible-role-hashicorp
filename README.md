@@ -26,6 +26,7 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
       hashicorp_products:
         - name: vault
           version: 1.4.2
+          type: ent
 ```
 
 The machine needs to be prepared in CI this is done using `molecule/resources/prepare.yml`:
@@ -69,6 +70,12 @@ hashicorp_installation_method: package
 # hashicorp_products:
 #   - name: vault
 #     version: 1.6.0
+
+# For `vault` you can choose what type you want to install, either:
+# `oss` (default), `ent` or `hsm`.
+# hashicorp_products:
+#   - name: vault
+#     type: oss
 ```
 
 ## [Requirements](#requirements)

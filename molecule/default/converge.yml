@@ -14,3 +14,4 @@
       hashicorp_products:
         - name: vault
           version: 1.4.2
+          type: ent
