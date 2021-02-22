@@ -9,7 +9,7 @@
 - name: install using package
   block:
     - name: install repository for RedHat
-      get_url:
+      ansible.builtin.get_url:
         url: "{{ hashicorp_repository_url }}"
         dest: /etc/yum.repos.d/hashicorp.repo
       when:
@@ -18,20 +18,20 @@
     - name: configure debian
       block:
         - name: install apt key for Debian
-          apt_key:
+          ansible.builtin.apt_key:
             url: "https://apt.releases.hashicorp.com/gpg"
             state: present
             validate_certs: no
 
         - name: install repository for Debian
-          apt_repository:
+          ansible.builtin.apt_repository:
             repo: deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main
             state: present
       when:
         - ansible_os_family == "Debian"
 
     - name: install hashicorp product using package
-      package:
+      ansible.builtin.package:
         name: "{{ item.name }}"
         state: present
       loop: "{{ hashicorp_products }}"
@@ -45,7 +45,7 @@
 - name: install manually
   block:
     - name: install hashicorp product manually
-      unarchive:
+      ansible.builtin.unarchive:
         src: "{{ hashicorp_src }}"
         dest: /usr/bin
         mode: "0755"
