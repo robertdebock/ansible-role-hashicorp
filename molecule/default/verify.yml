@@ -6,7 +6,8 @@
 
   tasks:
     - name: check if product is installed
-      command: "{{ item.name }} --version"
+      ansible.builtin.command:
+        cmd: "{{ item.name }} --version"
       args:
         creates: nothing
       loop:
