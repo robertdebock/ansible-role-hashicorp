@@ -7,6 +7,7 @@
   delegate_to: localhost
 
 - name: install using package
+  become: true
   block:
     - name: install repository for RedHat
       ansible.builtin.get_url:
