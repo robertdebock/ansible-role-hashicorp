@@ -13,5 +13,5 @@
       hashicorp_installation_method: manual
       hashicorp_products:
         - name: vault
-          version: 1.4.2
+          version: "1.9.0"
           type: ent
