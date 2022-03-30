@@ -19,7 +19,7 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
   roles:
     - role: robertdebock.hashicorp
       hashicorp_products:
-        - name: consul
+        - name: consul-1.11.2
 
     - role: robertdebock.hashicorp
       hashicorp_installation_method: manual

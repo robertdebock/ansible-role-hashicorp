@@ -7,7 +7,7 @@
   roles:
     - role: ansible-role-hashicorp
       hashicorp_products:
-        - name: consul
+        - name: consul-1.11.2
 
     - role: ansible-role-hashicorp
       hashicorp_installation_method: manual
