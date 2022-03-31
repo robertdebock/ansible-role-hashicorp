@@ -21,3 +21,9 @@ _hashicorp_src:
   hsm: "https://releases.hashicorp.com/{{ item.name }}/{{ item.version }}+ent.hsm/{{ item.name }}_{{ item.version }}+ent.hsm_linux_{{ hashicorp_architecture_mapping }}.zip"
 
 hashicorp_src: "{{ _hashicorp_src[item.type] | default(_hashicorp_src['oss'] ) }}"
+
+_version_coupler:
+  default: "-"
+  apt: "="
+
+version_coupler: "{{ _version_coupler[ansible_pkg_mgr] | default(_version_coupler['default'] ) }}"
