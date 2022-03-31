@@ -30,26 +30,29 @@
       when:
         - ansible_os_family == "Debian"
 
-    - name: install latest hashicorp product using package
-      ansible.builtin.package:
-        name: "{{ item.name }}"
-        state: present
-      loop: "{{ hashicorp_products }}"
-      loop_control:
-        label: "{{ item.name }}"
-      when:
-        - hashicorp_products is defined
+    - name: install hashicorp product using package
+      block:
+        - name: install latest hashicorp product using package
+          ansible.builtin.package:
+            name: "{{ item.name }}"
+            state: present
+          loop: "{{ hashicorp_products }}"
+          loop_control:
+            label: "{{ item.name }}"
+          when:
+            - item.version is not defined
 
-    - name: install versioned hashicorp product using package
-      ansible.builtin.package:
-        name: "{{ item.name }}{{ version_coupler }}{{ item.version }}"
-        state: present
-      loop: "{{ hashicorp_products }}"
-      loop_control:
-        label: "{{ item.name }}"
+        - name: install versioned hashicorp product using package
+          ansible.builtin.package:
+            name: "{{ item.name }}{{ version_coupler }}{{ item.version }}"
+            state: present
+          loop: "{{ hashicorp_products }}"
+          loop_control:
+            label: "{{ item.name }}"
+          when:
+            - item.version is defined
       when:
         - hashicorp_products is defined
-        - item.version is defined
   when:
     - hashicorp_installation_method == "package"
 
