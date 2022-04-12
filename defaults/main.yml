@@ -1,6 +1,9 @@
 ---
 # defaults file for hashicorp
 
+# You can select binary repository
+binary_repo: "releases.hashicorp.com"
+
 # You can select how to intall hashicorp products. Choose from `package` or
 # `manual`. `manual` means this role wil download from
 # "https://releases.hashicorp.com/vault/".
