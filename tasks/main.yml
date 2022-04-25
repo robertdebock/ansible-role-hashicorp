@@ -21,7 +21,6 @@
           ansible.builtin.apt_key:
             url: "https://apt.releases.hashicorp.com/gpg"
             state: present
-            validate_certs: no
 
         - name: install repository for Debian
           ansible.builtin.apt_repository:
