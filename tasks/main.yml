@@ -35,6 +35,7 @@
           ansible.builtin.package:
             name: "{{ item.name }}"
             state: present
+            update_cache: "yes"
           loop: "{{ hashicorp_products }}"
           loop_control:
             label: "{{ item.name }}"
@@ -45,6 +46,7 @@
           ansible.builtin.package:
             name: "{{ item.name }}{{ version_coupler }}{{ item.version }}"
             state: present
+            update_cache: "yes"
           loop: "{{ hashicorp_products }}"
           loop_control:
             label: "{{ item.name }}"
