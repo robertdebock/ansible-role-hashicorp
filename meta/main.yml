@@ -14,13 +14,14 @@ galaxy_info:
         - Candidate
     - name: EL
       versions:
-        - 8
+        git- 8
     - name: Debian
       versions:
         - bullseye
     - name: Fedora
       versions:
-        - all
+        - 35
+        - 36
     - name: Ubuntu
       versions:
         - all
