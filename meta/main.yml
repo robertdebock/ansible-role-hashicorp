@@ -14,7 +14,7 @@ galaxy_info:
         - Candidate
     - name: EL
       versions:
-        git- 8
+        - 8
     - name: Debian
       versions:
         - bullseye
