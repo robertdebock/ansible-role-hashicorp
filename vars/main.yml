@@ -16,9 +16,9 @@ _hashicorp_architecture_mapping:
 hashicorp_architecture_mapping: "{{ _hashicorp_architecture_mapping[ansible_architecture] }}"
 
 _hashicorp_src:
-  oss: "https://releases.hashicorp.com/{{ item.name }}/{{ item.version }}/{{ item.name }}_{{ item.version }}_linux_{{ hashicorp_architecture_mapping }}.zip"
-  ent: "https://releases.hashicorp.com/{{ item.name }}/{{ item.version }}+ent/{{ item.name }}_{{ item.version }}+ent_linux_{{ hashicorp_architecture_mapping }}.zip"
-  hsm: "https://releases.hashicorp.com/{{ item.name }}/{{ item.version }}+ent.hsm/{{ item.name }}_{{ item.version }}+ent.hsm_linux_{{ hashicorp_architecture_mapping }}.zip"
+  oss: "https://{{ binary_repo }}/{{ item.name }}/{{ item.version }}/{{ item.name }}_{{ item.version }}_linux_{{ hashicorp_architecture_mapping }}.zip"
+  ent: "https://{{ binary_repo }}/{{ item.name }}/{{ item.version }}+ent/{{ item.name }}_{{ item.version }}+ent_linux_{{ hashicorp_architecture_mapping }}.zip"
+  hsm: "https://{{ binary_repo }}/{{ item.name }}/{{ item.version }}+ent.hsm/{{ item.name }}_{{ item.version }}+ent.hsm_linux_{{ hashicorp_architecture_mapping }}.zip"
 
 hashicorp_src: "{{ _hashicorp_src[item.type] | default(_hashicorp_src['oss'] ) }}"
 
