@@ -55,3 +55,31 @@
   when:
     - hashicorp_products is defined
     - hashicorp_installation_method == "manual"
+
+- name: Test if hashicorp_destination is set correctly
+  ansible.builtin.assert:
+    that:
+      - hashicorp_destination is defined
+      - hashicorp_destination is string
+    quiet: yes
+
+- name: Test if hashicorp_group is set correctly
+  ansible.builtin.assert:
+    that:
+      - hashicorp_group is defined
+      - hashicorp_group is string
+    quiet: yes
+
+- name: Test if hashicorp_owner is set correctly
+  ansible.builtin.assert:
+    that:
+      - hashicorp_owner is defined
+      - hashicorp_owner is string
+    quiet: yes
+
+- name: Test if hashicorp_mode is set correctly
+  ansible.builtin.assert:
+    that:
+      - hashicorp_mode is defined
+      - hashicorp_mode is string
+    quiet: yes

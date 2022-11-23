@@ -61,8 +61,10 @@
     - name: Install hashicorp product manually
       ansible.builtin.unarchive:
         src: "{{ hashicorp_src }}"
-        dest: /usr/bin
-        mode: "0755"
+        dest: "{{ hashicorp_destination }}"
+        group: "{{ hashicorp_group }}"
+        mode: "{{ hashicorp_mode }}"
+        owner: "{{ hashicorp_owner }}"
         remote_src: yes
       loop: "{{ hashicorp_products }}"
       loop_control:

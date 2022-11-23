@@ -80,6 +80,14 @@ hashicorp_installation_method: package
 # hashicorp_products:
 #   - name: vault
 #     type: oss
+
+# Where to install the software in.
+hashicorp_destination: /usr/bin
+
+# The owner/group/mode for the installed binary.
+hashicorp_group: root
+hashicorp_owner: root
+hashicorp_mode: "0755"
 ```
 
 ## [Requirements](#requirements)
