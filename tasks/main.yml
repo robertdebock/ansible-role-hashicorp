@@ -12,6 +12,7 @@
       ansible.builtin.get_url:
         url: "{{ hashicorp_repository_url }}"
         dest: /etc/yum.repos.d/hashicorp.repo
+        mode: "0640"
       when:
         - ansible_os_family in [ "RedHat", "Rocky" ]
 
