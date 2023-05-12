@@ -5,13 +5,13 @@
   gather_facts: yes
 
   tasks:
-    - name: check if product is installed
+    - name: Check if product is installed
       ansible.builtin.command:
         cmd: "{{ item.name }} --version"
       args:
         creates: nothing
       loop:
-        - name: consul
-        - name: vault
+        - name: Consul
+        - name: Vault
       environment:
         PATH: "/bin:/usr/bin:/usr/local/bin"
