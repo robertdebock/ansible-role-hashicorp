@@ -1,4 +1,4 @@
-# Ansible role [hashicorp](#hashicorp)
+# [Ansible role hashicorp](#hashicorp)
 
 Install HashiCorp products using packages.
 
