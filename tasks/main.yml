@@ -23,6 +23,10 @@
       when:
         - ansible_os_family == "Debian"
       block:
+        - name: Install required package gpg
+          ansible.builtin.package:
+            name: gpg
+
         - name: Install apt key for Debian
           ansible.builtin.apt_key:
             url: "https://apt.releases.hashicorp.com/gpg"
