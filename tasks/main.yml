@@ -31,7 +31,6 @@
           ansible.builtin.apt_key:
             url: "https://apt.releases.hashicorp.com/gpg"
             state: present
-            validate_certs: no
 
         - name: Install repository for Debian
           ansible.builtin.apt_repository:
@@ -46,6 +45,7 @@
           ansible.builtin.package:
             name: "{{ item.name }}"
             state: present
+            update_cache: "yes"
           loop: "{{ hashicorp_products }}"
           loop_control:
             label: "{{ item.name }}"
@@ -56,6 +56,7 @@
           ansible.builtin.package:
             name: "{{ item.name }}{{ version_coupler }}{{ item.version }}"
             state: present
+            update_cache: "yes"
           loop: "{{ hashicorp_products }}"
           loop_control:
             label: "{{ item.name }}"
