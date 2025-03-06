@@ -18,11 +18,11 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
   gather_facts: true
 
   roles:
-    - role: robertdebock.hashicorp
+    - role: ansible-role-hashicorp
       hashicorp_products:
         - name: consul
           version: "1.11.3"
-    - role: robertdebock.hashicorp
+    - role: ansible-role-hashicorp
       hashicorp_installation_method: manual
       hashicorp_products:
         - name: vault
