@@ -116,7 +116,6 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 
 |container|tags|
 |---------|----|
-|[Amazon](https://hub.docker.com/r/robertdebock/amazonlinux)|Candidate|
 |[EL](https://hub.docker.com/r/robertdebock/enterpriselinux)|9|
 |[Debian](https://hub.docker.com/r/robertdebock/debian)|all|
 |[Fedora](https://hub.docker.com/r/robertdebock/fedora)|41|

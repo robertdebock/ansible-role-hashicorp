@@ -29,8 +29,6 @@ jobs:
       fail-fast: false
       matrix:
         distro:
-          - image: "amazonlinux"
-            tag: "latest"
           - image: "enterpriselinux"
             tag: "latest"
           - image: "debian"
