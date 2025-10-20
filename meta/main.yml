@@ -19,7 +19,8 @@ galaxy_info:
         - "41"
     - name: Ubuntu
       versions:
-        - all
+        - noble
+        - jammy
 
   galaxy_tags:
     - hashicorp
