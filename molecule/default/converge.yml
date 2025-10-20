@@ -10,8 +10,13 @@
     #     - name: consul
     #       version: "1.21.3"
     - role: robertdebock.hashicorp
-      hashicorp_installation_method: manual
       hashicorp_products:
         - name: vault
-          version: "1.20.1"
+          version: "1.20.4-1"
           type: ent
+    - role: robertdebock.hashicorp
+      hashicorp_installation_method: manual
+      hashicorp_products:
+        - name: consul
+          version: 1.21.5
+          type: oss

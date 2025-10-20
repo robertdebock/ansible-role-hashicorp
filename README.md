@@ -23,11 +23,16 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
     #     - name: consul
     #       version: "1.21.3"
     - role: robertdebock.hashicorp
-      hashicorp_installation_method: manual
       hashicorp_products:
         - name: vault
-          version: "1.20.1"
+          version: "1.20.4-1"
           type: ent
+    - role: robertdebock.hashicorp
+      hashicorp_installation_method: manual
+      hashicorp_products:
+        - name: consul
+          version: 1.21.5
+          type: oss
 ```
 
 The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/robertdebock/ansible-role-hashicorp/blob/master/molecule/default/prepare.yml):

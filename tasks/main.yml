@@ -27,16 +27,35 @@
           ansible.builtin.package:
             name: gpg
 
-        - name: Install apt key for Debian
-          ansible.builtin.apt_key:
-            url: "https://apt.releases.hashicorp.com/gpg"
-            state: present
-            validate_certs: false
+        - name: Install GPG key for Debian (modern method)
+          block:
+            - name: Create GPG key directory
+              ansible.builtin.file:
+                path: /etc/apt/keyrings
+                state: directory
+                mode: "0755"
 
-        - name: Install repository for Debian
-          ansible.builtin.apt_repository:
-            repo: deb [arch={{ hashicorp_architecture_mapping }}] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main
-            state: present
+            - name: Download GPG key
+              ansible.builtin.get_url:
+                url: "https://apt.releases.hashicorp.com/gpg"
+                dest: /etc/apt/keyrings/hashicorp-archive-keyring.gpg
+                mode: "0644"
+
+            - name: Install repository for Debian (modern method)
+              ansible.builtin.apt_repository:
+                repo: "deb [signed-by=/etc/apt/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
+                state: present
+          rescue:
+            - name: Install apt key for Debian (legacy method)
+              ansible.builtin.apt_key:
+                url: "https://apt.releases.hashicorp.com/gpg"
+                state: present
+                validate_certs: false
+
+            - name: Install repository for Debian (legacy method)
+              ansible.builtin.apt_repository:
+                repo: deb [arch={{ hashicorp_architecture_mapping }}] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main
+                state: present
 
     - name: Install hashicorp product using package
       when:
