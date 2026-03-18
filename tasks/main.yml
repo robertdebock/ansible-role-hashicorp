@@ -17,11 +17,11 @@
         dest: /etc/yum.repos.d/hashicorp.repo
         mode: "0640"
       when:
-        - ansible_os_family in [ "RedHat", "Rocky" ]
+        - ansible_facts['os_family'] in [ "RedHat", "Rocky" ]
 
     - name: Configure debian
       when:
-        - ansible_os_family == "Debian"
+        - ansible_facts['os_family'] == "Debian"
       block:
         - name: Install required package gpg
           ansible.builtin.package:
@@ -43,7 +43,7 @@
 
             - name: Install repository for Debian (modern method)
               ansible.builtin.apt_repository:
-                repo: "deb [signed-by=/etc/apt/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
+                repo: "deb [signed-by=/etc/apt/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ ansible_facts['distribution_release'] }} main"
                 state: present
           rescue:
             - name: Install apt key for Debian (legacy method)
@@ -54,7 +54,7 @@
 
             - name: Install repository for Debian (legacy method)
               ansible.builtin.apt_repository:
-                repo: deb [arch={{ hashicorp_architecture_mapping }}] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main
+                repo: deb [arch={{ hashicorp_architecture_mapping }}] https://apt.releases.hashicorp.com {{ ansible_facts['distribution_release'] }} main
                 state: present
 
     - name: Install hashicorp product using package
