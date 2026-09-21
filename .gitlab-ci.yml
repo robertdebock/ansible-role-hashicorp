@@ -25,8 +25,6 @@ molecule:
         tag: "latest"
       - image: "debian"
         tag: "bookworm"
-      - image: "debian"
-        tag: "bullseye"
       - image: "ubuntu"
         tag: "latest"
       - image: "ubuntu"
