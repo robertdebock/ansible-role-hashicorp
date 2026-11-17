@@ -15,8 +15,9 @@ galaxy_info:
       versions:
         - all
     - name: Fedora
-      versions:  # Will never work on "all", as rawhide is not supported by HC.
-        - "43"
+      versions:
+        # HashiCorp does not publish packages for rawhide or the very latest Fedora.
+        - "44"
     - name: Ubuntu
       versions:
         - noble
